@@ -73,9 +73,15 @@ function M.get()
   local streak_str = M.streak()
   local hint_str = M.last_hint()
 
-  if level_str ~= "" then table.insert(parts, level_str) end
-  if streak_str ~= "" then table.insert(parts, streak_str) end
-  if hint_str ~= "" then table.insert(parts, hint_str) end
+  if level_str ~= "" then
+    table.insert(parts, level_str)
+  end
+  if streak_str ~= "" then
+    table.insert(parts, streak_str)
+  end
+  if hint_str ~= "" then
+    table.insert(parts, hint_str)
+  end
 
   if #parts == 0 then
     return ""
@@ -105,10 +111,10 @@ M.lualine = {
   color = function()
     local level = config.levels.current
     local colors = {
-      { fg = "#9ece6a" },  -- Level 1: green
-      { fg = "#e0af68" },  -- Level 2: yellow
-      { fg = "#ff9e64" },  -- Level 3: orange
-      { fg = "#f7768e" },  -- Level 4: red
+      { fg = "#9ece6a" }, -- Level 1: green
+      { fg = "#e0af68" }, -- Level 2: yellow
+      { fg = "#ff9e64" }, -- Level 3: orange
+      { fg = "#f7768e" }, -- Level 4: red
     }
     return colors[level] or colors[1]
   end,

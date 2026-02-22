@@ -96,10 +96,7 @@ function M.handle_command(subcommand, args)
     if level and level >= 1 and level <= 4 then
       M.set_level(level)
     else
-      vim.notify(
-        "Vim Mentor: level must be 1-4 (1=Gentle, 2=Moderate, 3=Strict, 4=Master)",
-        vim.log.levels.WARN
-      )
+      vim.notify("Vim Mentor: level must be 1-4 (1=Gentle, 2=Moderate, 3=Strict, 4=Master)", vim.log.levels.WARN)
     end
   elseif subcommand == "report" then
     M.report()
@@ -109,7 +106,9 @@ function M.handle_command(subcommand, args)
     M.status()
   else
     vim.notify(
-      "Vim Mentor: unknown command '" .. subcommand .. "'. "
+      "Vim Mentor: unknown command '"
+        .. subcommand
+        .. "'. "
         .. "Available: enable, disable, toggle, level, mode, report, reset, status",
       vim.log.levels.WARN
     )
@@ -168,10 +167,7 @@ function M.set_level(level)
   cfg.ui.levels.current = level
 
   local level_names = { "Gentle", "Moderate", "Strict", "Master" }
-  vim.notify(
-    string.format("Vim Mentor: level set to %d (%s)", level, level_names[level]),
-    vim.log.levels.INFO
-  )
+  vim.notify(string.format("Vim Mentor: level set to %d (%s)", level, level_names[level]), vim.log.levels.INFO)
 end
 
 --- Open the progress dashboard.
@@ -271,10 +267,10 @@ function M.benchmark()
 
   vim.notify(
     string.format(
-      "Vim Mentor Benchmark:\n"
-        .. "  %d iterations in %.2f ms\n"
-        .. "  %.2f us per detection+suggestion",
-      iterations, elapsed_ms, per_op_us
+      "Vim Mentor Benchmark:\n" .. "  %d iterations in %.2f ms\n" .. "  %.2f us per detection+suggestion",
+      iterations,
+      elapsed_ms,
+      per_op_us
     ),
     vim.log.levels.INFO
   )

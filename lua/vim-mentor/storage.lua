@@ -101,8 +101,7 @@ end
 --- Falls back to default data if the file does not exist or is invalid.
 ---@param callback function|nil Optional callback with (data)
 function M.load(callback)
-  local path = config_ref and config_ref.data_path
-    or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
+  local path = config_ref and config_ref.data_path or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
 
   async_read(path, function(err, content)
     vim.schedule(function()
@@ -131,19 +130,22 @@ end
 function M.save(data, callback)
   data = data or current_data
   if not data then
-    if callback then callback(nil) end
+    if callback then
+      callback(nil)
+    end
     return
   end
 
-  local path = config_ref and config_ref.data_path
-    or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
+  local path = config_ref and config_ref.data_path or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
 
   ensure_directory(path)
 
   local ok, encoded = pcall(vim.json.encode, data)
   if not ok then
     vim.notify("Vim Mentor: Failed to encode progress data", vim.log.levels.WARN)
-    if callback then callback("json encode error") end
+    if callback then
+      callback("json encode error")
+    end
     return
   end
 
@@ -221,8 +223,7 @@ function M.force_save()
     return
   end
 
-  local path = config_ref and config_ref.data_path
-    or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
+  local path = config_ref and config_ref.data_path or (vim.fn.stdpath("data") .. "/vim-mentor/progress.json")
 
   ensure_directory(path)
 

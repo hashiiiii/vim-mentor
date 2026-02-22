@@ -28,15 +28,10 @@ function M.check_neovim_version()
   local minor = version.minor
 
   if major > 0 or (major == 0 and minor >= 10) then
-    vim.health.ok(
-      string.format("Neovim version %d.%d.%d (>= 0.10.0)", major, minor, version.patch)
-    )
+    vim.health.ok(string.format("Neovim version %d.%d.%d (>= 0.10.0)", major, minor, version.patch))
   else
     vim.health.error(
-      string.format(
-        "Neovim version %d.%d.%d is too old. Requires >= 0.10.0",
-        major, minor, version.patch
-      ),
+      string.format("Neovim version %d.%d.%d is too old. Requires >= 0.10.0", major, minor, version.patch),
       { "Update Neovim to version 0.10.0 or later" }
     )
   end
@@ -76,10 +71,7 @@ function M.check_data_directory()
       os.remove(test_file)
       vim.health.ok("Data directory is writable: " .. dir)
     else
-      vim.health.error(
-        "Data directory is not writable: " .. dir,
-        { "Check file permissions for: " .. dir }
-      )
+      vim.health.error("Data directory is not writable: " .. dir, { "Check file permissions for: " .. dir })
     end
   else
     -- Try to create
@@ -87,10 +79,7 @@ function M.check_data_directory()
     if ok_mkdir and vim.fn.isdirectory(dir) == 1 then
       vim.health.ok("Data directory created: " .. dir)
     else
-      vim.health.error(
-        "Cannot create data directory: " .. dir,
-        { "Manually create the directory: mkdir -p " .. dir }
-      )
+      vim.health.error("Cannot create data directory: " .. dir, { "Manually create the directory: mkdir -p " .. dir })
     end
   end
 
@@ -117,9 +106,7 @@ function M.check_plugin_status()
     local cfg = config.get()
     local level_names = { "Gentle", "Moderate", "Strict", "Master" }
     local level = cfg.teaching_mode or 1
-    vim.health.info(
-      string.format("Teaching mode: %d (%s)", level, level_names[level] or "Unknown")
-    )
+    vim.health.info(string.format("Teaching mode: %d (%s)", level, level_names[level] or "Unknown"))
     vim.health.info("Auto-advance: " .. tostring(cfg.auto_advance))
 
     -- Report blocked keys
@@ -132,9 +119,7 @@ function M.check_plugin_status()
     vim.health.info("Blocked keys: " .. table.concat(blocked, ", "))
 
     -- Report excluded filetypes
-    vim.health.info(
-      "Excluded filetypes: " .. table.concat(cfg.excluded_filetypes, ", ")
-    )
+    vim.health.info("Excluded filetypes: " .. table.concat(cfg.excluded_filetypes, ", "))
   end
 end
 

@@ -19,26 +19,26 @@ local function setup_highlights()
   -- Base groups (user can override in their colorscheme)
   local highlights = {
     -- Window chrome
-    VimMentorBorder      = { link = "FloatBorder" },
-    VimMentorFloat       = { link = "NormalFloat" },
-    VimMentorTitle       = { fg = "#ff9e64", bold = true },
+    VimMentorBorder = { link = "FloatBorder" },
+    VimMentorFloat = { link = "NormalFloat" },
+    VimMentorTitle = { fg = "#ff9e64", bold = true },
 
     -- Content elements
-    VimMentorDetected    = { fg = "#f7768e", italic = true },  -- Red: what you did wrong
-    VimMentorCommand     = { fg = "#7aa2f7", bold = true },    -- Blue: the Vim command
-    VimMentorKey         = { fg = "#e0af68", bold = true },    -- Yellow: key to press
-    VimMentorDesc        = { fg = "#a9b1d6" },                 -- Grey: description text
-    VimMentorSuccess     = { fg = "#9ece6a", bold = true },    -- Green: success feedback
-    VimMentorStreak      = { fg = "#bb9af7", bold = true },    -- Purple: streak counter
+    VimMentorDetected = { fg = "#f7768e", italic = true }, -- Red: what you did wrong
+    VimMentorCommand = { fg = "#7aa2f7", bold = true }, -- Blue: the Vim command
+    VimMentorKey = { fg = "#e0af68", bold = true }, -- Yellow: key to press
+    VimMentorDesc = { fg = "#a9b1d6" }, -- Grey: description text
+    VimMentorSuccess = { fg = "#9ece6a", bold = true }, -- Green: success feedback
+    VimMentorStreak = { fg = "#bb9af7", bold = true }, -- Purple: streak counter
 
     -- Virtual text
     VimMentorVirtualText = { fg = "#565f89", italic = true },
 
     -- Level indicators
-    VimMentorLevel1      = { fg = "#9ece6a" },  -- Green: gentle
-    VimMentorLevel2      = { fg = "#e0af68" },  -- Yellow: moderate
-    VimMentorLevel3      = { fg = "#ff9e64" },  -- Orange: strict
-    VimMentorLevel4      = { fg = "#f7768e" },  -- Red: master
+    VimMentorLevel1 = { fg = "#9ece6a" }, -- Green: gentle
+    VimMentorLevel2 = { fg = "#e0af68" }, -- Yellow: moderate
+    VimMentorLevel3 = { fg = "#ff9e64" }, -- Orange: strict
+    VimMentorLevel4 = { fg = "#f7768e" }, -- Red: master
   }
 
   for name, hl in pairs(highlights) do
@@ -73,7 +73,7 @@ local function calculate_layout(hint)
   else
     width = fc.width
   end
-  local height = #lines + 2  -- +2 for top/bottom padding
+  local height = #lines + 2 -- +2 for top/bottom padding
 
   local win_config = {
     relative = fc.relative,
@@ -231,15 +231,16 @@ function M.show(hint)
 
   -- Window options
   vim.api.nvim_win_set_option(state.win_id, "winblend", config.floating.winblend)
-  vim.api.nvim_win_set_option(state.win_id, "winhighlight",
-    "Normal:" .. config.floating.highlights.background ..
-    ",FloatBorder:" .. config.floating.highlights.border
+  vim.api.nvim_win_set_option(
+    state.win_id,
+    "winhighlight",
+    "Normal:" .. config.floating.highlights.background .. ",FloatBorder:" .. config.floating.highlights.border
   )
 
   -- Auto-close timer (if configured and level allows it)
   local timeout = config.interaction.timeout
   if hint.level and hint.level >= 3 then
-    timeout = 0  -- No auto-close in strict/master mode
+    timeout = 0 -- No auto-close in strict/master mode
   end
 
   if timeout > 0 then
@@ -291,12 +292,7 @@ function M.show_virtual_text(hint)
   end
 
   local line = vim.api.nvim_win_get_cursor(0)[1] - 1
-  local text = string.format(
-    "%s Use: %s (%s)",
-    config.virtual_text.prefix,
-    hint.keys or "?",
-    hint.desc or ""
-  )
+  local text = string.format("%s Use: %s (%s)", config.virtual_text.prefix, hint.keys or "?", hint.desc or "")
 
   vim.api.nvim_buf_set_extmark(0, vt_ns, line, 0, {
     virt_text = { { text, config.virtual_text.hl_group } },

@@ -42,36 +42,36 @@ M.defaults = {
     -- "editor" : appears at a fixed position (like nvim-notify)
     relative = "cursor",
     -- Anchor point when relative = "cursor"
-    anchor = "SW",  -- South-West: popup appears above-right of cursor
+    anchor = "SW", -- South-West: popup appears above-right of cursor
     row_offset = -2,
     col_offset = 1,
     -- Window dimensions
-    width = "auto",   -- "auto" or number
+    width = "auto", -- "auto" or number
     max_width = 60,
     min_width = 30,
     -- Appearance
-    border = "rounded",  -- "none"|"single"|"double"|"rounded"|"solid"|"shadow"
+    border = "rounded", -- "none"|"single"|"double"|"rounded"|"solid"|"shadow"
     -- Styling
-    winblend = 10,       -- Transparency (0=opaque, 100=invisible)
+    winblend = 10, -- Transparency (0=opaque, 100=invisible)
     -- Highlight groups (user-overridable)
     highlights = {
-      border     = "VimMentorBorder",
+      border = "VimMentorBorder",
       background = "VimMentorFloat",
-      title      = "VimMentorTitle",
-      command    = "VimMentorCommand",
-      key        = "VimMentorKey",
-      desc       = "VimMentorDesc",
-      detected   = "VimMentorDetected",
-      success    = "VimMentorSuccess",
-      streak     = "VimMentorStreak",
+      title = "VimMentorTitle",
+      command = "VimMentorCommand",
+      key = "VimMentorKey",
+      desc = "VimMentorDesc",
+      detected = "VimMentorDetected",
+      success = "VimMentorSuccess",
+      streak = "VimMentorStreak",
     },
     -- Auto-close after N milliseconds (0 = wait for correct input)
     timeout = 0,
     -- Animation (requires nvim 0.10+)
     animation = {
       enabled = true,
-      style = "fade_in",  -- "fade_in" | "slide_down" | "none"
-      duration = 150,      -- milliseconds
+      style = "fade_in", -- "fade_in" | "slide_down" | "none"
+      duration = 150, -- milliseconds
     },
   },
 
@@ -101,11 +101,11 @@ M.defaults = {
     show_last_hint = true,
     -- Icons (requires nerd font)
     icons = {
-      blocked  = " ",
-      hint     = " ",
-      streak   = " ",
-      level    = " ",
-      success  = " ",
+      blocked = " ",
+      hint = " ",
+      streak = " ",
+      level = " ",
+      success = " ",
     },
   },
 
@@ -118,8 +118,8 @@ M.defaults = {
     -- Level 3: Strict - show hint, block until correct Vim input
     -- Level 4: Master - block silently, expect you to know
     current = 1,
-    auto_advance = true,      -- Automatically increase level based on progress
-    advance_threshold = 50,   -- Correct inputs needed to advance
+    auto_advance = true, -- Automatically increase level based on progress
+    advance_threshold = 50, -- Correct inputs needed to advance
   },
 
   -- ============================================================
@@ -135,7 +135,7 @@ M.defaults = {
     -- Max consecutive failures before showing extended help
     escalation_threshold = 3,
     -- What happens on escalation
-    escalation_action = "extended_help",  -- "extended_help" | "lower_level" | "demo"
+    escalation_action = "extended_help", -- "extended_help" | "lower_level" | "demo"
   },
 
   -- ============================================================
@@ -145,7 +145,7 @@ M.defaults = {
     enabled = true,
     -- Flash the correct command briefly on success
     success_flash = true,
-    success_flash_duration = 300,  -- ms
+    success_flash_duration = 300, -- ms
     -- Streak tracking
     streak = {
       enabled = true,

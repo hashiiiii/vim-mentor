@@ -75,28 +75,25 @@ end
 ---@param count number The milestone number reached
 function M.show_milestone(count)
   local messages = {
-    [5]   = { title = "Nice start!",      body = "5 correct Vim commands in a row!" },
-    [10]  = { title = "Getting better!",   body = "10 streak! You are learning fast." },
-    [25]  = { title = "Impressive!",       body = "25 streak! Vim is becoming natural." },
-    [50]  = { title = "Vim Apprentice!",   body = "50 streak! True muscle memory." },
-    [100] = { title = "Vim Master!",       body = "100 streak! Nothing can stop you." },
+    [5] = { title = "Nice start!", body = "5 correct Vim commands in a row!" },
+    [10] = { title = "Getting better!", body = "10 streak! You are learning fast." },
+    [25] = { title = "Impressive!", body = "25 streak! Vim is becoming natural." },
+    [50] = { title = "Vim Apprentice!", body = "50 streak! True muscle memory." },
+    [100] = { title = "Vim Master!", body = "100 streak! Nothing can stop you." },
   }
 
-  local msg = messages[count] or {
-    title = "Milestone!",
-    body = string.format("%d correct commands in a row!", count),
-  }
+  local msg = messages[count]
+    or {
+      title = "Milestone!",
+      body = string.format("%d correct commands in a row!", count),
+    }
 
   -- Use vim.notify to show milestone (integrates with nvim-notify if available)
-  vim.notify(
-    string.format("%s\n%s", msg.title, msg.body),
-    vim.log.levels.INFO,
-    {
-      title = "Vim Mentor",
-      icon = config.statusline.icons.streak,
-      timeout = 3000,
-    }
-  )
+  vim.notify(string.format("%s\n%s", msg.title, msg.body), vim.log.levels.INFO, {
+    title = "Vim Mentor",
+    icon = config.statusline.icons.streak,
+    timeout = 3000,
+  })
 end
 
 -- ============================================================
@@ -185,9 +182,9 @@ function M.get_stats()
     streak = state.streak,
     total_correct = state.total_correct,
     total_incorrect = state.total_incorrect,
-    accuracy = state.total_correct + state.total_incorrect > 0
-      and math.floor(state.total_correct / (state.total_correct + state.total_incorrect) * 100)
-      or 0,
+    accuracy = state.total_correct + state.total_incorrect > 0 and math.floor(
+      state.total_correct / (state.total_correct + state.total_incorrect) * 100
+    ) or 0,
   }
 end
 

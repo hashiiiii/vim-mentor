@@ -59,15 +59,12 @@ function M.on_non_vim_detected(detection, hint)
   if level == 1 then
     -- GENTLE: Show hint, allow the action to proceed
     M.show_hint_and_allow(hint)
-
   elseif level == 2 then
     -- MODERATE: Show hint, delay action by 1 second
     M.show_hint_and_delay(hint, 1000)
-
   elseif level == 3 then
     -- STRICT: Show hint, block until correct input
     M.block_and_wait(hint)
-
   elseif level == 4 then
     -- MASTER: Block silently (minimal hint)
     M.block_silent(hint)
@@ -204,10 +201,7 @@ function M.escalate(hint, fail_key)
     local original = config.levels.current
     config.levels.current = math.max(1, original - 1)
     vim.notify(
-      string.format(
-        "Vim Mentor: Temporarily lowering to Level %d for this command.",
-        config.levels.current
-      ),
+      string.format("Vim Mentor: Temporarily lowering to Level %d for this command.", config.levels.current),
       vim.log.levels.INFO,
       { title = "Vim Mentor" }
     )
@@ -215,11 +209,7 @@ function M.escalate(hint, fail_key)
     -- Show a brief animation of how the command works
     -- (placeholder -- would need terminal recording or step-by-step)
     vim.notify(
-      string.format(
-        "Vim Mentor: Try pressing '%s' -- %s",
-        hint.keys or "?",
-        hint.desc or ""
-      ),
+      string.format("Vim Mentor: Try pressing '%s' -- %s", hint.keys or "?", hint.desc or ""),
       vim.log.levels.INFO,
       { title = "Vim Mentor - Demo" }
     )

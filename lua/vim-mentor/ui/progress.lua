@@ -195,14 +195,13 @@ function M.render_dashboard(data, session)
 
   local shown = 0
   for _, entry in ipairs(sorted) do
-    if shown >= 10 then break end
+    if shown >= 10 then
+      break
+    end
     local s = entry.stats
     local total = (s.correct or 0) + (s.prompted or 0)
     local acc = total > 0 and math.floor((s.correct or 0) / total * 100) or 0
-    add(string.format(
-      "     %-10s %7d  %8d     %3d%%",
-      entry.cmd, s.correct or 0, s.prompted or 0, acc
-    ))
+    add(string.format("     %-10s %7d  %8d     %3d%%", entry.cmd, s.correct or 0, s.prompted or 0, acc))
     shown = shown + 1
   end
 
