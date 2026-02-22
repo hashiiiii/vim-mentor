@@ -1,0 +1,31 @@
+# Lua
+*.luac
+luac.out
+
+# Editor
+*.swp
+*.swo
+*~
+.nvimrc
+.exrc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Dependencies
+lua_modules/
+.luarocks/
+
+# Test output
+.busted
+luacov.stats.out
+luacov.report.out
+
+# Data
+*.json.bak
+
+# VS Code Extension
+vscode-vim-mentor/node_modules/
+vscode-vim-mentor/out/
+vscode-vim-mentor/*.vsix

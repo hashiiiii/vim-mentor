@@ -1,0 +1,129 @@
+*vim-mentor.txt*    Real-time Vim operation teaching plugin
+
+==============================================================================
+CONTENTS                                              *vim-mentor-contents*
+
+    1. Introduction .......................... |vim-mentor-introduction|
+    2. Requirements .......................... |vim-mentor-requirements|
+    3. Installation .......................... |vim-mentor-installation|
+    4. Configuration ......................... |vim-mentor-configuration|
+    5. Commands .............................. |vim-mentor-commands|
+    6. Teaching Modes ........................ |vim-mentor-modes|
+    7. Learning Levels ....................... |vim-mentor-levels|
+    8. Dashboard ............................. |vim-mentor-dashboard|
+    9. Statusline ............................ |vim-mentor-statusline|
+
+==============================================================================
+1. INTRODUCTION                                  *vim-mentor-introduction*
+
+vim-mentor is a Neovim plugin that teaches Vim operations in real-time
+during your actual coding workflow. When you use non-Vim operations like
+arrow keys, mouse clicks, or Page Up/Down, vim-mentor detects this and
+suggests the correct Vim command.
+
+Features:
+- Detects non-Vim operations (arrow keys, mouse, Page Up/Down, etc.)
+- Suggests optimal Vim commands based on context
+- 4 teaching modes from gentle hints to strict blocking
+- 5-level progressive learning system
+- Streak tracking and gamification
+- Learning dashboard with statistics
+
+==============================================================================
+2. REQUIREMENTS                                  *vim-mentor-requirements*
+
+- Neovim >= 0.10.0
+
+==============================================================================
+3. INSTALLATION                                  *vim-mentor-installation*
+
+Using lazy.nvim:
+>lua
+    {
+      "vim-mentor/vim-mentor",
+      event = "VeryLazy",
+      opts = {},
+    }
+<
+
+Using packer.nvim:
+>lua
+    use {
+      "vim-mentor/vim-mentor",
+      config = function()
+        require("vim-mentor").setup()
+      end,
+    }
+<
+
+==============================================================================
+4. CONFIGURATION                              *vim-mentor-configuration*
+
+>lua
+    require("vim-mentor").setup({
+      teaching_mode = 2,       -- 1:Gentle, 2:Moderate, 3:Strict, 4:Master
+      auto_advance = true,
+      advance_threshold = 50,
+      blocked_keys = {
+        arrow_keys = true,
+        mouse = true,
+        page_keys = true,
+        home_end = true,
+        ctrl_arrow = true,
+        hjkl_repeat = true,
+      },
+      excluded_filetypes = { "NvimTree", "TelescopePrompt", "lazy" },
+    })
+<
+
+==============================================================================
+5. COMMANDS                                        *vim-mentor-commands*
+
+:VimMentor enable          Enable the plugin
+:VimMentor disable         Disable the plugin
+:VimMentor toggle          Toggle enabled/disabled
+:VimMentor level [N]       Show/set learning level (1-5)
+:VimMentor mode [N]        Show/set teaching mode (1-4)
+:VimMentor report          Show usage statistics
+:VimMentor reset           Reset all learning data
+:VimMentorDashboard        Open learning dashboard
+
+==============================================================================
+6. TEACHING MODES                                    *vim-mentor-modes*
+
+Level 1: Gentle     Show hint, allow the action
+Level 2: Moderate   Show hint, delay action by 1 second
+Level 3: Strict     Block until correct Vim input
+Level 4: Master     Block with minimal UI (virtual text only)
+
+==============================================================================
+7. LEARNING LEVELS                                  *vim-mentor-levels*
+
+Level 1: Beginner      Arrow keys → hjkl, gg/G
+Level 2: Novice        + Home/End, PageUp/Down → 0/^/$, w/b/e, Ctrl-d/u
+Level 3: Intermediate  + Mouse, Ctrl+Arrow → /, *, H/M/L
+Level 4: Advanced      + hjkl repeat → f/t, text objects
+Level 5: Expert        + Inefficient motions → marks, jump list
+
+==============================================================================
+8. DASHBOARD                                      *vim-mentor-dashboard*
+
+Open with :VimMentorDashboard to view:
+- Current session statistics
+- Lifetime learning progress
+- Per-command accuracy breakdown
+- Level progress bar
+
+==============================================================================
+9. STATUSLINE                                    *vim-mentor-statusline*
+
+For lualine.nvim:
+>lua
+    sections = {
+      lualine_x = {
+        require("vim-mentor.ui.statusline").lualine,
+      },
+    }
+<
+
+ vim:tw=78:ts=8:ft=help:norl:

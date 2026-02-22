@@ -1,0 +1,190 @@
+{
+  "name": "vim-mentor",
+  "displayName": "Vim Mentor",
+  "description": "Learn Vim keybindings while coding - detects non-Vim operations and teaches correct Vim commands",
+  "version": "0.1.0",
+  "publisher": "vim-mentor",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Education",
+    "Keymaps",
+    "Other"
+  ],
+  "keywords": [
+    "vim",
+    "learning",
+    "keybindings",
+    "teaching",
+    "mentor"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "vim-mentor.enable",
+        "title": "Vim Mentor: Enable"
+      },
+      {
+        "command": "vim-mentor.disable",
+        "title": "Vim Mentor: Disable"
+      },
+      {
+        "command": "vim-mentor.toggle",
+        "title": "Vim Mentor: Toggle"
+      },
+      {
+        "command": "vim-mentor.setLevel",
+        "title": "Vim Mentor: Set Learning Level"
+      },
+      {
+        "command": "vim-mentor.setMode",
+        "title": "Vim Mentor: Set Teaching Mode"
+      },
+      {
+        "command": "vim-mentor.dashboard",
+        "title": "Vim Mentor: Open Dashboard"
+      },
+      {
+        "command": "vim-mentor.reset",
+        "title": "Vim Mentor: Reset Progress"
+      }
+    ],
+    "configuration": {
+      "title": "Vim Mentor",
+      "properties": {
+        "vim-mentor.teachingMode": {
+          "type": "number",
+          "default": 2,
+          "enum": [1, 2, 3, 4],
+          "enumDescriptions": [
+            "Gentle - hint only",
+            "Moderate - hint + delay",
+            "Strict - block until correct",
+            "Master - minimal UI + block"
+          ],
+          "description": "Teaching strictness level"
+        },
+        "vim-mentor.learningLevel": {
+          "type": "number",
+          "default": 1,
+          "enum": [1, 2, 3, 4, 5],
+          "description": "Current learning level"
+        },
+        "vim-mentor.autoAdvance": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically advance learning level"
+        },
+        "vim-mentor.advanceThreshold": {
+          "type": "number",
+          "default": 50,
+          "description": "Correct inputs needed to advance level"
+        },
+        "vim-mentor.blockedKeys.arrowKeys": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect and teach alternatives for arrow keys"
+        },
+        "vim-mentor.blockedKeys.mouse": {
+          "type": "boolean",
+          "default": false,
+          "description": "Block mouse click for cursor positioning"
+        },
+        "vim-mentor.blockedKeys.pageKeys": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect and teach alternatives for PageUp/PageDown"
+        },
+        "vim-mentor.blockedKeys.homeEnd": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect and teach alternatives for Home/End keys"
+        },
+        "vim-mentor.blockedKeys.ctrlArrow": {
+          "type": "boolean",
+          "default": true,
+          "description": "Detect and teach alternatives for Ctrl+Arrow keys"
+        },
+        "vim-mentor.excludedLanguages": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "Language IDs to exclude from detection"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "key": "up",
+        "command": "vim-mentor.interceptArrowUp",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockArrowKeys"
+      },
+      {
+        "key": "down",
+        "command": "vim-mentor.interceptArrowDown",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockArrowKeys"
+      },
+      {
+        "key": "left",
+        "command": "vim-mentor.interceptArrowLeft",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockArrowKeys"
+      },
+      {
+        "key": "right",
+        "command": "vim-mentor.interceptArrowRight",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockArrowKeys"
+      },
+      {
+        "key": "home",
+        "command": "vim-mentor.interceptHome",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockHomeEnd"
+      },
+      {
+        "key": "end",
+        "command": "vim-mentor.interceptEnd",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockHomeEnd"
+      },
+      {
+        "key": "pageup",
+        "command": "vim-mentor.interceptPageUp",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockPageKeys"
+      },
+      {
+        "key": "pagedown",
+        "command": "vim-mentor.interceptPageDown",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockPageKeys"
+      },
+      {
+        "key": "ctrl+left",
+        "command": "vim-mentor.interceptCtrlLeft",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockCtrlArrow"
+      },
+      {
+        "key": "ctrl+right",
+        "command": "vim-mentor.interceptCtrlRight",
+        "when": "editorTextFocus && vim-mentor.enabled && vim-mentor.blockCtrlArrow"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.56.0"
+  }
+}
