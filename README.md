@@ -153,10 +153,10 @@ See [vscode-vim-mentor/README.md](vscode-vim-mentor/README.md) for installation 
 
 ## Documentation
 
-- [Getting Started Guide](docs/getting-started.md) -- Vim未経験者向けの導入ガイド
-- [Architecture](docs/architecture.md) -- 技術アーキテクチャ詳細
-- [UI Design Spec](docs/ui-design-spec.md) -- UI設計仕様
-- [Performance Tuning](docs/performance-tuning-spec.md) -- パフォーマンス設計
+- [Getting Started Guide](docs/getting-started.md) -- Complete beginner's guide for those new to Vim
+- [Architecture](docs/architecture.md) -- Technical architecture details
+- [UI Design Spec](docs/ui-design-spec.md) -- UI design specification
+- [Performance Tuning](docs/performance-tuning-spec.md) -- Performance tuning guide
 
 ## License
 
